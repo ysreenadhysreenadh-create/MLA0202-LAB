@@ -1,0 +1,46 @@
+# sreenadh
+
+import numpy as np
+from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
+X = np.array([
+    [750, 50000],
+    [720, 45000],
+    [680, 40000],
+    [650, 35000],
+    [600, 30000],
+    [580, 28000],
+    [800, 60000],
+    [550, 25000],
+    [700, 42000],
+    [620, 32000]
+])
+
+y = np.array([1, 1, 1, 1, 0, 0, 1, 0, 1, 0])
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.3, random_state=42
+)
+
+model = LogisticRegression()
+model.fit(X_train, y_train)
+
+y_pred = model.predict(X_test)
+print("y sreenadh 192525166")
+print("Actual Labels:")
+print(y_test)
+
+print("\nPredicted Labels:")
+print(y_pred)
+
+print("\nAccuracy:", accuracy_score(y_test, y_pred) * 100, "%")
+
+new_customer = [[500, 20000]] # Changed to a low credit score and income
+prediction = model.predict(new_customer)
+
+if prediction[0] == 1:
+   
+    print("\nPrediction:  Good Credit Score")
+else:
+    print("\nPrediction:  Poor Credit Score")
