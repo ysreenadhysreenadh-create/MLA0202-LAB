@@ -1,0 +1,24 @@
+import numpy as np
+from sklearn.linear_model import LinearRegression
+
+# Monthly sales data
+months = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]).reshape(-1, 1)
+sales = np.array([100, 120, 135, 150, 170, 185, 200, 220, 235, 250])
+
+# Create and train model
+model = LinearRegression()
+model.fit(months, sales)
+
+# Predict future sales
+future_months = np.array([11, 12, 13]).reshape(-1, 1)
+future_sales = model.predict(future_months)
+
+print(f"Name: Sreenadh 192525166")
+
+print(f"\nExisting Sales:")
+for month, sale in zip(months.flatten(), sales):
+    print(f"Month {month}: {sale} units")
+
+print(f"\nFuture Sales Prediction:")
+for month, sale in zip(future_months.flatten(), future_sales):
+    print(f"Month {month}: {sale:.2f} units")
