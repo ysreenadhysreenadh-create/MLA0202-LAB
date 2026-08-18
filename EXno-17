@@ -1,0 +1,51 @@
+import numpy as np
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
+
+# Mobile data: RAM(GB), Battery(mAh), Storage(GB), Price Range
+X = np.array([
+    [2, 3000, 32],
+    [3, 3500, 32],
+    [4, 4000, 64],
+    [4, 4500, 64],
+    [6, 4500, 128],
+    [6, 5000, 128],
+    [8, 5000, 256],
+    [8, 6000, 256],
+    [12, 5000, 256],
+    [12, 6000, 512],
+    [4, 4000, 128],
+    [8, 4500, 128]
+])
+
+# 0 = Low, 1 = Medium, 2 = High, 3 = Premium
+y = np.array([0, 0, 1, 1, 2, 2, 3, 3, 3, 3, 1, 2])
+
+# Split data
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.3, random_state=42
+)
+
+# Create and train model
+model = RandomForestClassifier(n_estimators=100, random_state=42)
+model.fit(X_train, y_train)
+
+# Prediction
+y_pred = model.predict(X_test)
+
+# Accuracy
+accuracy = accuracy_score(y_test, y_pred) * 100
+
+print(f"Name: Sreenadh 192525166")
+print(f"\nActual Price Ranges: {y_test}")
+print(f"\nPredicted Price Ranges: {y_pred}")
+print(f"\nAccuracy: {accuracy:.2f}%")
+
+# Predict new mobile price range
+new_mobile = [[8, 5000, 256]]
+prediction = model.predict(new_mobile)
+
+price_range = ["Low", "Medium", "High", "Premium"]
+
+print(f"\nNew Mobile Prediction: {price_range[prediction[0]]}")
